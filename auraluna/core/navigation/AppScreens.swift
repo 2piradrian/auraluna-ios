@@ -10,11 +10,11 @@ enum AppScreens: Hashable {
     
     var route: String {
         switch self {
-        case .homeScreen: return "home_screen"
-        case .favoritesScreen: return "favorites_screen"
-        case .communityScreen: return "community_screen"
-        case .loopPlayerScreen: return "loop_player_screen"
-        case .linealPlayerScreen: return "lineal_player_screen"
+            case .homeScreen: return "home_screen"
+            case .favoritesScreen: return "favorites_screen"
+            case .communityScreen: return "community_screen"
+            case .loopPlayerScreen: return "loop_player_screen"
+            case .linealPlayerScreen: return "lineal_player_screen"
         }
     }
     
