@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ThemeEnvironment {
-    let colors: ColorScheme
+    let colors: AppColorScheme
     let typography: Typography
 }
 

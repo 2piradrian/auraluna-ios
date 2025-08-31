@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ColorScheme {
+struct AppColorScheme {
     let primary: Color
     let onPrimary: Color
     let primaryContainer: Color
@@ -44,8 +44,8 @@ struct ColorScheme {
     let surfaceContainerHighest: Color
 }
 
-extension ColorScheme {
-    static let light = ColorScheme(
+extension AppColorScheme {
+    static let light = AppColorScheme(
         primary: Color(hex: "#8C4E29"),
         onPrimary: Color(hex: "#FFFFFF"),
         primaryContainer: Color(hex: "#FFDBCA"),
@@ -89,7 +89,7 @@ extension ColorScheme {
         surfaceContainerHighest: Color(hex: "#F0DFD7")
     )
     
-    static let dark = ColorScheme(
+    static let dark = AppColorScheme(
         primary: Color(hex: "#FFB68E"),
         onPrimary: Color(hex: "#532201"),
         primaryContainer: Color(hex: "#6F3813"),
