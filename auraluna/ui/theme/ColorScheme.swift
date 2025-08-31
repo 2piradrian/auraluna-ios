@@ -45,103 +45,47 @@ struct AppColorScheme {
 }
 
 extension AppColorScheme {
-    static let light = AppColorScheme(
-        primary: Color(hex: "#8C4E29"),
-        onPrimary: Color(hex: "#FFFFFF"),
-        primaryContainer: Color(hex: "#FFDBCA"),
-        onPrimaryContainer: Color(hex: "#331200"),
+    static let current = AppColorScheme(
+        primary: Color("colorPrimary"),
+        onPrimary: Color("colorOnPrimary"),
+        primaryContainer: Color("colorPrimaryContainer"),
+        onPrimaryContainer: Color("colorOnPrimaryContainer"),
         
-        secondary: Color(hex: "#765848"),
-        onSecondary: Color(hex: "#FFFFFF"),
-        secondaryContainer: Color(hex: "#FFDBCA"),
-        onSecondaryContainer: Color(hex: "#2B160A"),
+        secondary: Color("colorSecondary"),
+        onSecondary: Color("colorOnSecondary"),
+        secondaryContainer: Color("colorSecondaryContainer"),
+        onSecondaryContainer: Color("colorOnSecondaryContainer"),
         
-        tertiary: Color(hex: "#636032"),
-        onTertiary: Color(hex: "#FFFFFF"),
-        tertiaryContainer: Color(hex: "#EAE5AB"),
-        onTertiaryContainer: Color(hex: "#1E1C00"),
+        tertiary: Color("colorTertiary"),
+        onTertiary: Color("colorOnTertiary"),
+        tertiaryContainer: Color("colorTertiaryContainer"),
+        onTertiaryContainer: Color("colorOnTertiaryContainer"),
         
-        error: Color(hex: "#BA1A1A"),
-        onError: Color(hex: "#FFFFFF"),
-        errorContainer: Color(hex: "#FFDAD6"),
-        onErrorContainer: Color(hex: "#410002"),
+        error: Color("colorError"),
+        onError: Color("colorOnError"),
+        errorContainer: Color("colorErrorContainer"),
+        onErrorContainer: Color("colorOnErrorContainer"),
         
-        background: Color(hex: "#FFF8F6"),
-        onBackground: Color(hex: "#221A15"),
-        surface: Color(hex: "#FFF8F6"),
-        onSurface: Color(hex: "#221A15"),
-        surfaceVariant: Color(hex: "#F4DED4"),
-        onSurfaceVariant: Color(hex: "#52443C"),
+        background: Color("colorBackground"),
+        onBackground: Color("colorOnBackground"),
+        surface: Color("colorSurface"),
+        onSurface: Color("colorOnSurface"),
+        surfaceVariant: Color("colorSurfaceVariant"),
+        onSurfaceVariant: Color("colorOnSurfaceVariant"),
         
-        outline: Color(hex: "#85746B"),
-        outlineVariant: Color(hex: "#D7C2B9"),
-        scrim: Color(hex: "#000000"),
-        inverseSurface: Color(hex: "#382E29"),
-        inverseOnSurface: Color(hex: "#FFEDE5"),
-        inversePrimary: Color(hex: "#FFB68E"),
+        outline: Color("colorOutline"),
+        outlineVariant: Color("colorOutlineVariant"),
+        scrim: Color("colorScrim"),
+        inverseSurface: Color("colorInverseSurface"),
+        inverseOnSurface: Color("colorInverseOnSurface"),
+        inversePrimary: Color("colorInversePrimary"),
         
-        surfaceDim: Color(hex: "#E8D7CF"),
-        surfaceBright: Color(hex: "#FFF8F6"),
-        surfaceContainerLowest: Color(hex: "#FFFFFF"),
-        surfaceContainerLow: Color(hex: "#FFF1EB"),
-        surfaceContainer: Color(hex: "#FCEAE3"),
-        surfaceContainerHigh: Color(hex: "#F6E5DD"),
-        surfaceContainerHighest: Color(hex: "#F0DFD7")
+        surfaceDim: Color("colorSurfaceDim"),
+        surfaceBright: Color("colorSurfaceBright"),
+        surfaceContainerLowest: Color("colorSurfaceContainerLowest"),
+        surfaceContainerLow: Color("colorSurfaceContainerLow"),
+        surfaceContainer: Color("colorSurfaceContainer"),
+        surfaceContainerHigh: Color("colorSurfaceContainerHigh"),
+        surfaceContainerHighest: Color("colorSurfaceContainerHighest")
     )
-    
-    static let dark = AppColorScheme(
-        primary: Color(hex: "#FFB68E"),
-        onPrimary: Color(hex: "#532201"),
-        primaryContainer: Color(hex: "#6F3813"),
-        onPrimaryContainer: Color(hex: "#FFDBCA"),
-        
-        secondary: Color(hex: "#E6BEAA"),
-        onSecondary: Color(hex: "#432B1D"),
-        secondaryContainer: Color(hex: "#5C4132"),
-        onSecondaryContainer: Color(hex: "#FFDBCA"),
-        
-        tertiary: Color(hex: "#CDC991"),
-        onTertiary: Color(hex: "#343208"),
-        tertiaryContainer: Color(hex: "#4B481D"),
-        onTertiaryContainer: Color(hex: "#EAE5AB"),
-        
-        error: Color(hex: "#FFB4AB"),
-        onError: Color(hex: "#690005"),
-        errorContainer: Color(hex: "#93000A"),
-        onErrorContainer: Color(hex: "#FFDAD6"),
-        
-        background: Color(hex: "#1A120D"),
-        onBackground: Color(hex: "#F0DFD7"),
-        surface: Color(hex: "#1A120D"),
-        onSurface: Color(hex: "#F0DFD7"),
-        surfaceVariant: Color(hex: "#52443C"),
-        onSurfaceVariant: Color(hex: "#D7C2B9"),
-        
-        outline: Color(hex: "#9F8D84"),
-        outlineVariant: Color(hex: "#52443C"),
-        scrim: Color(hex: "#000000"),
-        inverseSurface: Color(hex: "#F0DFD7"),
-        inverseOnSurface: Color(hex: "#382E29"),
-        inversePrimary: Color(hex: "#8C4E29"),
-        
-        surfaceDim: Color(hex: "#1A120D"),
-        surfaceBright: Color(hex: "#413732"),
-        surfaceContainerLowest: Color(hex: "#140D09"),
-        surfaceContainerLow: Color(hex: "#221A15"),
-        surfaceContainer: Color(hex: "#271E19"),
-        surfaceContainerHigh: Color(hex: "#312823"),
-        surfaceContainerHighest: Color(hex: "#3D332E")
-    )
-}
-
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let r = Double((int >> 16) & 0xFF) / 255
-        let g = Double((int >> 8) & 0xFF) / 255
-        let b = Double(int & 0xFF) / 255
-        self.init(red: r, green: g, blue: b)
-    }
 }

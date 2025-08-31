@@ -6,7 +6,7 @@ struct ThemeEnvironment {
 }
 
 private struct ThemeKey: EnvironmentKey {
-    static let defaultValue = ThemeEnvironment(colors: .light, typography: .default)
+    static let defaultValue = ThemeEnvironment(colors: .current, typography: .default)
 }
 
 extension EnvironmentValues {
