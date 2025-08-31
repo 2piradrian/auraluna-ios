@@ -22,6 +22,8 @@ struct HomeScreen: View {
                 navController.append(.communityScreen)
             }
             
+            Text(NSLocalizedString("HAPPINESS", comment: "Prueba de localización"))
+            
             Button("Abrir Loop Player") {
                 navController.append(.loopPlayerScreen(audioId: 42))
                 /**

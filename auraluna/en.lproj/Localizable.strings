@@ -1,0 +1,7 @@
+// Audio Types
+
+DISTRESS = "Angustia";
+ANXIETY = "Ansiedad";
+STRESS = "Estrés";
+HAPPINESS = "Alegría";
+ANGER = "Enojo";
