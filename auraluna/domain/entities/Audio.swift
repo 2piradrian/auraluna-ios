@@ -2,8 +2,8 @@ struct Audio {
     let id: Int                // This is the id of the audio in the database
     let name: String
     let author: String
-    let coverResource: Int
-    let audioResource: Int     // This is the id of the audio in the audio file
+    let coverResource: String
+    let audioResource: String     // This is the id of the audio in the audio file
     let type: AudioType
     let format: AudioFormat
     let categories: [AudioCategory]

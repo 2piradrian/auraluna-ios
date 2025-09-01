@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AudiosRepositoryI {
+protocol AudioRepositoryI {
     
     func getById(_ id: Int) async -> Audio?
     

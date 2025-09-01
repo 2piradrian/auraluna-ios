@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Café con leche",
+    "author": "Gabi Molina",
+    "audioResource": "cafe_con_leche",
+    "coverResource": "cafe_con_leche_img",
+    "type": "LOOP",
+    "format": "SONG",
+    "categories": ["DISTRESS", "ANXIETY", "ANGER"],
+    "duration": "4:00",
+    "times": [5, 10, 15]
+  },
+  {
+    "id": 2,
+    "name": "Corazón y Estres",
+    "author": "Gabi Molina",
+    "audioResource": "corazon_y_estres",
+    "coverResource": "corazon_y_estres_img",
+    "type": "LOOP",
+    "format": "SONG",
+    "categories": ["DISTRESS", "ANXIETY", "STRESS"],
+    "duration": "1:00",
+    "times": [5, 10, 15]
+  },
+  {
+    "id": 3,
+    "name": "Lluvia",
+    "author": "Gabi Molina",
+    "audioResource": "lluvia",
+    "coverResource": "lluvia_img",
+    "type": "LINEAL",
+    "format": "SOUND",
+    "categories": ["DISTRESS", "ANXIETY", "STRESS"],
+    "duration": "0:30",
+    "times": [1, 2, 3]
+  }
+]

@@ -1,6 +1,6 @@
 import Foundation
 
-enum AudioCategory: CaseIterable, Identifiable {
+enum AudioCategory: String, CaseIterable, Identifiable {
     case distress
     case anxiety
     case stress
