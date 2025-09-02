@@ -31,4 +31,5 @@ struct AudioMapper {
             duration: domain.duration
         )
     }
+    
 }
