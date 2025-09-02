@@ -1,6 +1,6 @@
 import Foundation
 
-protocol FavoriteDataSourceI {
+protocol FavoriteDatasourceI {
     
     func insert(favorite: Favorite) async
     

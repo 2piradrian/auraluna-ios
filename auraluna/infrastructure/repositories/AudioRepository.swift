@@ -2,10 +2,10 @@ import Foundation
 
 class AudioRepository: AudioRepositoryI {
 
-    private let datasource: AudioDataSourceI
+    private let datasource: AudioDatasourceI
     private let mapper: AudioMapper
 
-    init(datasource: AudioDataSourceI, mapper: AudioMapper) {
+    init(datasource: AudioDatasourceI, mapper: AudioMapper) {
         self.datasource = datasource
         self.mapper = mapper
     }

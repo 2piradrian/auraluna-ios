@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AudioDataSourceI {
+protocol AudioDatasourceI {
     
     func getById(id: Int) async throws -> AudioModel
     

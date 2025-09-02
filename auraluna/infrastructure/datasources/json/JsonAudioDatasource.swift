@@ -1,6 +1,6 @@
 import Foundation
 
-class JsonAudioDatasource: AudioDataSourceI {
+class JsonAudioDatasource: AudioDatasourceI {
     
     private func getAudioJson() async throws -> String {
         guard let url = Bundle.main.url(forResource: "audio", withExtension: "json") else {
