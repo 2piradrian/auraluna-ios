@@ -9,4 +9,13 @@ class AppContainer {
         )
     }()
     
+    lazy var favoriteRepository: FavoriteRepository = {
+        FavoriteRepository(
+            datasource: CoreDataFavoriteDatasource(),
+            mapper: FavoriteMapper(
+                context: FavoritesDatabase.shared.context
+            )
+        )
+    }()
+    
 }

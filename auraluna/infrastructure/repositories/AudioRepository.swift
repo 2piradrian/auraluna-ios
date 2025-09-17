@@ -30,7 +30,7 @@ class AudioRepository: AudioRepositoryI {
         }
     }
 
-    func getByCategories(categories: [AudioCategory]) async -> [Audio] {
+    func getByCategories(categories: [AudioCategory]) async ->[Audio] {
         do {
             let categoryStrings = categories.map { $0.rawValue }
             let models = try await datasource.getByCategories(categories: categoryStrings)

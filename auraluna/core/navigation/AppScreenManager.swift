@@ -15,7 +15,7 @@ struct AppScreenManager: View {
     }
     
     var body: some View {
-        NavigationStack(path: $path) {
+        /**NavigationStack(path: $path) {
             HomeScreen(
                 navController: $path,
                 screenUtils: screenUtils,
@@ -33,6 +33,6 @@ struct AppScreenManager: View {
                         Text("Not Implemented")
                 }
             }
-        }
+        }**/
     }
 }
