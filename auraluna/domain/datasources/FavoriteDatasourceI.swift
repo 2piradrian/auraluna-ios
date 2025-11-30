@@ -2,12 +2,11 @@ import Foundation
 
 protocol FavoriteDatasourceI {
     
-    func insert(favorite: Favorite) async
+    func insert(favorite: Favorite) async throws
     
-    func getAll() async -> [Favorite]
+    func getAll() async throws -> [FavoriteModel]
     
-    func getById(audioId: Int) async -> Favorite?
+    func getById(audioId: Int) async throws -> FavoriteModel?
     
-    func delete(favorite: Favorite) async
-    
+    func delete(favorite: Favorite) async throws
 }
