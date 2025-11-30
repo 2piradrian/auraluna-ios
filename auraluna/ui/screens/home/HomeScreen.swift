@@ -7,37 +7,45 @@ struct HomeScreen: View {
     let screenUtils: ScreenUtils
     
     var body: some View {
-        VStack(spacing: 16) {
-            Text("Home Screen")
-                .font(.system(size: screenUtils.resolveSize(
-                    mobile: 20,
-                    tablet: 26
-                )))
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Auraluna")
+                .font(.largeTitle)
                 .fontWeight(.bold)
-            
-            Button("Ir a Favoritos") {
-                navController.append(.favoritesScreen)
-            }
-            
-            Button("Ir a Community") {
-                navController.append(.communityScreen)
-            }
-            
-            Text(NSLocalizedString("HAPPINESS", comment: "Prueba de localización"))
-            
-            Button("Abrir Loop Player") {
-                navController.append(.loopPlayerScreen(audioId: 42))
-                /**
-                 Ejemplo
-                 Button("Play Audio") {
-                     if let routeBuilder = RouteUtils.audioRoutes[audio.type] {
-                         let screen = routeBuilder(audio.id)
-                         path.append(screen) // path es NavigationStack path
-                     }
-                 }
-                 **/
+                .padding(.horizontal)
+
+            ScrollView {
+                VStack(spacing: 30) {
+                    AudioCoverListView(
+                        list: viewModel.audios,
+                        title: "Tómate tu tiempo",
+                        onAudioClick: { audio in
+                            // TODO: Implement navigation
+                            print("Clicked on audio: \(audio.name)")
+                        }
+                    )
+                    
+                    AudioCoverListView(
+                        list: viewModel.audios,
+                        title: "Momentos de paz",
+                        onAudioClick: { audio in
+                            // TODO: Implement navigation
+                            print("Clicked on audio: \(audio.name)")
+                        }
+                    )
+                    
+                    AudioCoverListView(
+                        list: viewModel.audios,
+                        title: "Crea tu ritual",
+                        onAudioClick: { audio in
+                            // TODO: Implement navigation
+                            print("Clicked on audio: \(audio.name)")
+                        }
+                    )
+                }
             }
         }
-        .padding()
+        .onAppear {
+            viewModel.getAudios()
+        }
     }
 }
