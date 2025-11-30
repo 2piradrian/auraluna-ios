@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    
     @Binding var navController: [AppScreens]
-    let screenUtils: ScreenUtils
     @StateObject var viewModel: HomeViewModel
+    let screenUtils: ScreenUtils
     
     var body: some View {
         VStack(spacing: 16) {

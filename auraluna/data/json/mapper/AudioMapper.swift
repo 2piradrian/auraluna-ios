@@ -9,9 +9,9 @@ struct AudioMapper {
             author: model.author,
             coverResource: model.coverResource,
             audioResource: model.audioResource,
-            type: AudioType(rawValue: model.type)!,
-            format: AudioFormat(rawValue: model.format)!,
-            categories: model.categories.compactMap { AudioCategory(rawValue: $0) },
+            type: AudioType(rawValue: model.type) ?? .loop,
+            format: AudioFormat(rawValue: model.format) ?? .sound,
+            categories: model.categories.compactMap { AudioCategory(rawValue: $0.lowercased()) },
             times: model.times,
             duration: model.duration
         )

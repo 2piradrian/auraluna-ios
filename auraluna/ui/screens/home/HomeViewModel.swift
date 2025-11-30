@@ -3,6 +3,7 @@ import Combine
 
 @MainActor
 class HomeViewModel: ObservableObject {
+    
     private let favoritesRepository: FavoriteRepository
     private let audiosRepository: AudioRepository
     
