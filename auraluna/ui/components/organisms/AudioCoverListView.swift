@@ -29,6 +29,11 @@ struct AudioCoverListView: View {
                                     .font(.caption)
                                     .lineLimit(1)
                                     .frame(width: 140)
+                                
+                                Text(audio.author)
+                                    .font(.caption2)
+                                    .lineLimit(1)
+                                    .frame(width: 140)
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
