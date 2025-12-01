@@ -35,6 +35,16 @@ struct AppScreenManager: View {
                         ),
                         screenUtils: screenUtils,
                     )
+                    case .favoritesScreen:
+                    FavoritesScreen(
+                        navController: $path,
+                        screenUtils: screenUtils
+                    )
+                    case .communityScreen:
+                    CommunityScreen(
+                        navController: $path,
+                        screenUtils: screenUtils
+                    )
                     default:
                         Text("Not Implemented")
                 }
