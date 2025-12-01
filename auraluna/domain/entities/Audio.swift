@@ -1,12 +1,20 @@
-struct Audio {
-    let id: Int                // This is the id of the audio in the database
+import Foundation
+
+struct Audio: Codable, Identifiable {
+    let id: Int // This is the id of the audio in the database
     let name: String
     let author: String
-    let coverResource: Int
-    let audioResource: Int     // This is the id of the audio in the audio file
+    let audioResource: String // This is the id of the audio in the database
+    let coverResource: String
     let type: AudioType
     let format: AudioFormat
     let categories: [AudioCategory]
-    let times: [Int]
     let duration: String
+    let times: [Int]
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, author, type, format, categories, duration, times
+        case audioResource = "audioResource"
+        case coverResource = "coverResource"
+    }
 }

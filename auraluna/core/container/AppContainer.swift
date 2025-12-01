@@ -1,14 +1,21 @@
 import Foundation
 
 class AppContainer {
-    /**
-    lazy var favoritesRepository: FavoritesRepository = {
-        FavoritesRepository()
+    
+    lazy var audioRepository: AudioRepository = {
+        AudioRepository(
+            datasource: JsonAudioDatasource(),
+            mapper: AudioMapper()
+        )
     }()
     
-    lazy var audiosRepository: AudiosRepository = {
-        AudiosRepository()
+    lazy var favoriteRepository: FavoriteRepository = {
+        FavoriteRepository(
+            datasource: CoreDataFavoriteDatasource(),
+            mapper: FavoriteMapper(
+                context: FavoritesDatabase.shared.context
+            )
+        )
     }()
-    **/
     
 }

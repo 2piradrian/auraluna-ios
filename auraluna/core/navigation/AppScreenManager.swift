@@ -18,17 +18,33 @@ struct AppScreenManager: View {
         NavigationStack(path: $path) {
             HomeScreen(
                 navController: $path,
+                viewModel: HomeViewModel(
+                    favoritesRepository: appContainer.favoriteRepository,
+                    audiosRepository: appContainer.audioRepository,
+                ),
                 screenUtils: screenUtils,
-                viewModel: HomeViewModel(appContainer: appContainer)
             )
             .navigationDestination(for: AppScreens.self) { screen in
                 switch screen {
                     case .homeScreen:
-                        HomeScreen(
-                            navController: $path,
-                            screenUtils: screenUtils,
-                            viewModel: HomeViewModel(appContainer: appContainer)
-                        )
+                    HomeScreen(
+                        navController: $path,
+                        viewModel: HomeViewModel(
+                            favoritesRepository: appContainer.favoriteRepository,
+                            audiosRepository: appContainer.audioRepository,
+                        ),
+                        screenUtils: screenUtils,
+                    )
+                    case .favoritesScreen:
+                    FavoritesScreen(
+                        navController: $path,
+                        screenUtils: screenUtils
+                    )
+                    case .communityScreen:
+                    CommunityScreen(
+                        navController: $path,
+                        screenUtils: screenUtils
+                    )
                     default:
                         Text("Not Implemented")
                 }
