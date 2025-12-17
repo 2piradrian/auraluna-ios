@@ -7,6 +7,11 @@ struct PlayerSlider: View {
 
     var body: some View {
         VStack {
+            Slider(value: $position, in: 0...duration) { editing in
+                if !editing {
+                    seekAction(position)
+                }
+            }
             HStack {
                 Text(formatTime(position))
                     .font(.caption)
@@ -14,17 +19,7 @@ struct PlayerSlider: View {
                 Text(formatTime(duration))
                     .font(.caption)
             }
-            .padding(.horizontal, 4)
-            .padding(.vertical, 8)
-
-            Slider(value: $position, in: 0...duration) { editing in
-                if !editing {
-                    seekAction(position)
-                }
-            }
-            .padding(.bottom, 16)
         }
-        .frame(height: 48) // Matches the Android component's height
     }
 
     private func formatTime(_ time: Double) -> String {

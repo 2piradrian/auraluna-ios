@@ -17,8 +17,6 @@ struct DurationList: View {
                     )
                 }
             }
-            .padding(.horizontal)
         }
-        .frame(height: 48)
     }
 }
