@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AudioCoverListView: View {
+struct AudioCoverList: View {
     let list: [Audio]
     let title: String
     let onAudioClick: (Audio) -> Void

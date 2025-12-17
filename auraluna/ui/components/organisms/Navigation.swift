@@ -7,7 +7,6 @@ struct AppNavigationBar: View {
         HStack {
             // Home Button
             Button(action: {
-                // Navigate to home screen
                 if !navController.isEmpty {
                     navController = []
                 }
@@ -23,7 +22,6 @@ struct AppNavigationBar: View {
             
             // Favorites Button
             Button(action: {
-                // Navigate to favorites screen
                 if navController != [.favoritesScreen] {
                     navController = [.favoritesScreen]
                 }
@@ -39,7 +37,6 @@ struct AppNavigationBar: View {
             
             // Community Button
             Button(action: {
-                // Navigate to community screen
                 if navController != [.communityScreen] {
                     navController = [.communityScreen]
                 }
