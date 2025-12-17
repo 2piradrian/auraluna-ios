@@ -28,6 +28,9 @@ struct PlayerSlider: View {
     }
 
     private func formatTime(_ time: Double) -> String {
+        if time.isNaN || time.isInfinite {
+            return "00:00"
+        }
         let minutes = Int(time) / 60
         let seconds = Int(time) % 60
         return String(format: "%02d:%02d", minutes, seconds)

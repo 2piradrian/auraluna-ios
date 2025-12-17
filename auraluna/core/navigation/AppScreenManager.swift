@@ -45,8 +45,22 @@ struct AppScreenManager: View {
                         navController: $path,
                         screenUtils: screenUtils
                     )
-                    default:
-                        Text("Not Implemented")
+                    case let .loopPlayerScreen(audioId):
+                        LoopPlayerScreen(
+                            navController: $path,
+                            viewModel: LoopPlayerViewModel(
+                                audioRepository: appContainer.audioRepository,
+                                audioId: audioId
+                            )
+                        )
+                    case let .linealPlayerScreen(audioId):
+                        LinealPlayerScreen(
+                            navController: $path,
+                            viewModel: LinealPlayerViewModel(
+                                audioRepository: appContainer.audioRepository,
+                                audioId: audioId
+                            )
+                        )
                 }
             }
         }

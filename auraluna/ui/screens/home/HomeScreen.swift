@@ -20,7 +20,12 @@ struct HomeScreen: View {
                             list: viewModel.audios,
                             title: "Tómate tu tiempo",
                             onAudioClick: { audio in
-                                print("Clicked on audio: \(audio.name)")
+                                switch audio.type {
+                                case .loop:
+                                    navController.append(.loopPlayerScreen(audioId: audio.id))
+                                case .lineal:
+                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                                }
                             }
                         )
 
@@ -28,7 +33,12 @@ struct HomeScreen: View {
                             list: viewModel.audios,
                             title: "Momentos de paz",
                             onAudioClick: { audio in
-                                print("Clicked on audio: \(audio.name)")
+                                switch audio.type {
+                                case .loop:
+                                    navController.append(.loopPlayerScreen(audioId: audio.id))
+                                case .lineal:
+                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                                }
                             }
                         )
 
@@ -36,7 +46,12 @@ struct HomeScreen: View {
                             list: viewModel.audios,
                             title: "Crea tu ritual",
                             onAudioClick: { audio in
-                                print("Clicked on audio: \(audio.name)")
+                                switch audio.type {
+                                case .loop:
+                                    navController.append(.loopPlayerScreen(audioId: audio.id))
+                                case .lineal:
+                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                                }
                             }
                         )
                     }
