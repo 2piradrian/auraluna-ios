@@ -12,6 +12,6 @@ struct AudioPlayerImage: View {
         .aspectRatio(1, contentMode: .fit)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.vertical, 16)
-        .frame(maxWidth: 300)
+        .frame(maxWidth: 350)
     }
 }

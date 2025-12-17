@@ -34,7 +34,8 @@ struct LoopPlayerScreen: View {
                     Text("Loading...")
                 }
             }
-            .padding()
+            .padding() // This will apply horizontal and vertical padding
+
         }
         .onAppear {
             viewModel.getAudioDetails()

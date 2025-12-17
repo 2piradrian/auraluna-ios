@@ -10,6 +10,9 @@ struct PlayIconButton: View {
                 .font(.title)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
+                .background(Color.accentColor) // Filled background
+                .foregroundColor(.white)      // White icon color
+                .cornerRadius(10)             // Rounded corners for the button
         }
     }
 }
