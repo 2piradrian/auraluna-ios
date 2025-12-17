@@ -13,12 +13,22 @@ struct FavoritesScreen: View {
             FavoritesList(
                 favorites: viewModel.favorites,
                 onFavoriteClick: { favorite in
-                    // TODO: Implement navigation to player
+                    Task {
+                        if let audio = await viewModel.getAudio(audioId: favorite.audioId) {
+                            switch audio.type {
+                            case .lineal:
+                                navController.append(.linealPlayerScreen(audioId: audio.id))
+                            case .loop:
+                                navController.append(.loopPlayerScreen(audioId: audio.id))
+                            }
+                        }
+                    }
                 },
                 toggleFavorite: { favorite in
                     viewModel.toggleFavorite(favorite: favorite)
                 }
             )
+            .padding(.horizontal)
             
             Spacer()
             

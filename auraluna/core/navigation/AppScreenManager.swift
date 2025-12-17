@@ -39,7 +39,8 @@ struct AppScreenManager: View {
                         FavoritesScreen(
                             navController: $path,
                             viewModel: FavoritesViewModel(
-                                favoriteRepository: appContainer.favoriteRepository
+                                favoriteRepository: appContainer.favoriteRepository,
+                                audioRepository: appContainer.audioRepository
                             ),
                             screenUtils: screenUtils
                         )

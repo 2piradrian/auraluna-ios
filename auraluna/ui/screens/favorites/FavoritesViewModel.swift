@@ -4,11 +4,13 @@ import Combine
 @MainActor
 class FavoritesViewModel: ObservableObject {
     private let favoriteRepository: FavoriteRepository
+    private let audioRepository: AudioRepository
     
     @Published var favorites: [Favorite] = []
     
-    init(favoriteRepository: FavoriteRepository) {
+    init(favoriteRepository: FavoriteRepository, audioRepository: AudioRepository) {
         self.favoriteRepository = favoriteRepository
+        self.audioRepository = audioRepository
     }
     
     func getFavorites() {
@@ -22,8 +24,11 @@ class FavoritesViewModel: ObservableObject {
             if let fav = await favoriteRepository.getById(audioId: favorite.audioId) {
                 await favoriteRepository.delete(favorite: fav)
             }
-            // After deleting, refresh the list
             getFavorites()
         }
+    }
+
+    func getAudio(audioId: Int) async -> Audio? {
+        return await audioRepository.getById(id: audioId)
     }
 }
