@@ -12,16 +12,17 @@ class FavoriteRepository: FavoriteRepositoryI {
     
     func insert(favorite: Favorite) async {
         do {
-            return
+            try await datasource.insert(favorite: favorite)
         }
         catch {
-            return
+            // Handle error
         }
     }
     
     func getAll() async -> [Favorite] {
         do {
-            return []
+            let models = try await datasource.getAll()
+            return models.map { mapper.toDomain(model: $0) }
         }
         catch {
             return []
@@ -30,6 +31,9 @@ class FavoriteRepository: FavoriteRepositoryI {
     
     func getById(audioId: Int) async -> Favorite? {
         do {
+            if let model = try await datasource.getById(audioId: audioId) {
+                return mapper.toDomain(model: model)
+            }
             return nil
         }
         catch {
@@ -39,10 +43,10 @@ class FavoriteRepository: FavoriteRepositoryI {
     
     func delete(favorite: Favorite) async {
         do {
-            return
+            try await datasource.delete(favorite: favorite)
         }
         catch {
-            return
+            // Handle error
         }
     }
 }

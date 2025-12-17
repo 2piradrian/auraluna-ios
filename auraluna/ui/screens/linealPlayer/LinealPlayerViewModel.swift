@@ -5,7 +5,7 @@ import AVFoundation
 @MainActor
 class LinealPlayerViewModel: NSObject, ObservableObject {
     private let audioRepository: AudioRepository
-    // TODO: Add favorite repository
+    private let favoriteRepository: FavoriteRepository
     private let audioId: Int
     private var player: AVPlayer?
     private var timeObserver: Any?
@@ -17,8 +17,9 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
     @Published var duration: Double = 0.0
     @Published var isReady: Bool = false
 
-    init(audioRepository: AudioRepository, audioId: Int) {
+    init(audioRepository: AudioRepository, favoriteRepository: FavoriteRepository, audioId: Int) {
         self.audioRepository = audioRepository
+        self.favoriteRepository = favoriteRepository
         self.audioId = audioId
         super.init()
     }
@@ -26,6 +27,9 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
     func getAudioDetails() {
         Task {
             self.audio = await audioRepository.getById(id: audioId)
+            if let favorite = await favoriteRepository.getById(audioId: audioId) {
+                self.isFavorite = true
+            }
             await setupPlayer()
         }
     }
@@ -34,10 +38,8 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
         guard let audio = audio, let url = Bundle.main.url(forResource: audio.audioResource, withExtension: "mp3") else { return }
         player = AVPlayer(url: url)
         
-        // Observe player status
         player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
         
-        // Observe time
         timeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: 600), queue: .main) { [weak self] time in
             guard let self = self else { return }
             self.position = time.seconds
@@ -59,8 +61,20 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
     }
 
     func toggleFavorite() {
-        // TODO: Implement favorite logic with repository
-        isFavorite.toggle()
+        Task {
+            if isFavorite {
+                if let audio = self.audio, let favToDelete = await favoriteRepository.getById(audioId: audio.id) {
+                    await favoriteRepository.delete(favorite: favToDelete)
+                    isFavorite = false
+                }
+            } else {
+                if let audio = self.audio {
+                    let newFavorite = Favorite(id: audio.id, audioId: audio.id, name: audio.name, author: audio.author)
+                    await favoriteRepository.insert(favorite: newFavorite)
+                    isFavorite = true
+                }
+            }
+        }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

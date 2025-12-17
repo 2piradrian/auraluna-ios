@@ -5,6 +5,7 @@ import AVFoundation
 @MainActor
 class LoopPlayerViewModel: NSObject, ObservableObject {
     private let audioRepository: AudioRepository
+    private let favoriteRepository: FavoriteRepository
     private let audioId: Int
     private var player: AVQueuePlayer?
 
@@ -19,8 +20,9 @@ class LoopPlayerViewModel: NSObject, ObservableObject {
         }
     }
 
-    init(audioRepository: AudioRepository, audioId: Int) {
+    init(audioRepository: AudioRepository, favoriteRepository: FavoriteRepository, audioId: Int) {
         self.audioRepository = audioRepository
+        self.favoriteRepository = favoriteRepository
         self.audioId = audioId
         super.init()
     }
@@ -29,6 +31,9 @@ class LoopPlayerViewModel: NSObject, ObservableObject {
         Task {
             self.audio = await audioRepository.getById(id: audioId)
             if let audio = self.audio {
+                if let favorite = await favoriteRepository.getById(audioId: audio.id) {
+                    self.isFavorite = true
+                }
                 self.durations = audio.times
                 if let first = audio.times.first {
                     self.selectedDuration = first
@@ -64,7 +69,20 @@ class LoopPlayerViewModel: NSObject, ObservableObject {
     }
 
     func toggleFavorite() {
-        isFavorite.toggle()
+        Task {
+            if isFavorite {
+                if let audio = self.audio, let favToDelete = await favoriteRepository.getById(audioId: audio.id) {
+                    await favoriteRepository.delete(favorite: favToDelete)
+                    isFavorite = false
+                }
+            } else {
+                if let audio = self.audio {
+                    let newFavorite = Favorite(id: audio.id, audioId: audio.id, name: audio.name, author: audio.author)
+                    await favoriteRepository.insert(favorite: newFavorite)
+                    isFavorite = true
+                }
+            }
+        }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
