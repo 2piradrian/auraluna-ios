@@ -34,7 +34,7 @@ struct LoopPlayerScreen: View {
                     Text("Loading...")
                 }
             }
-            .padding() // This will apply horizontal and vertical padding
+            .padding()
 
         }
         .onAppear {

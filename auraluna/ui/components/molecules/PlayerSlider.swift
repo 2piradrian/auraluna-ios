@@ -4,10 +4,12 @@ struct PlayerSlider: View {
     @Binding var position: Double
     var duration: Double
     var seekAction: (Double) -> Void
+    var onEditingChanged: (Bool) -> Void // Added
 
     var body: some View {
         VStack {
             Slider(value: $position, in: 0...duration) { editing in
+                onEditingChanged(editing) // Call the new closure
                 if !editing {
                     seekAction(position)
                 }

@@ -15,7 +15,6 @@ class FavoriteRepository: FavoriteRepositoryI {
             try await datasource.insert(favorite: favorite)
         }
         catch {
-            // Handle error
         }
     }
     
@@ -46,7 +45,6 @@ class FavoriteRepository: FavoriteRepositoryI {
             try await datasource.delete(favorite: favorite)
         }
         catch {
-            // Handle error
         }
     }
 }

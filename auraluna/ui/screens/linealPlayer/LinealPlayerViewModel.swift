@@ -9,6 +9,7 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
     private let audioId: Int
     private var player: AVPlayer?
     private var timeObserver: Any?
+    private var isSeeking: Bool = false
 
     @Published var audio: Audio?
     @Published var isFavorite: Bool = false
@@ -36,14 +37,16 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
 
     private func setupPlayer() async {
         guard let audio = audio, let url = Bundle.main.url(forResource: audio.audioResource, withExtension: "mp3") else { return }
-        player = AVPlayer(url: url)
         
-        player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+        let playerItem = AVPlayerItem(url: url)
+        player = AVPlayer(playerItem: playerItem)
         
+        player?.currentItem?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+        player?.addObserver(self, forKeyPath: "rate", options: [.new, .initial], context: nil)
+
         timeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: 600), queue: .main) { [weak self] time in
-            guard let self = self else { return }
+            guard let self = self, !self.isSeeking else { return }
             self.position = time.seconds
-            self.isPlaying = self.player?.rate != 0
         }
     }
 
@@ -77,12 +80,20 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
         }
     }
 
+    func setIsSeeking(to isSeeking: Bool) {
+        self.isSeeking = isSeeking
+    }
+
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "status", let player = object as? AVPlayer {
-            if player.status == .readyToPlay {
-                let durationSeconds = player.currentItem?.duration.seconds ?? 0.0
+        if keyPath == "status", let item = object as? AVPlayerItem {
+            if item.status == .readyToPlay {
+                let durationSeconds = item.duration.seconds ?? 0.0
                 self.duration = durationSeconds.isNaN ? 0.0 : durationSeconds
                 self.isReady = true
+            }
+        } else if keyPath == "rate", let player = object as? AVPlayer {
+             if let rate = change?[.newKey] as? Float {
+                self.isPlaying = rate != 0
             }
         }
     }
@@ -91,7 +102,8 @@ class LinealPlayerViewModel: NSObject, ObservableObject {
         if let timeObserver = timeObserver {
             player?.removeTimeObserver(timeObserver)
         }
-        player?.removeObserver(self, forKeyPath: "status")
+        player?.currentItem?.removeObserver(self, forKeyPath: "status")
+        player?.removeObserver(self, forKeyPath: "rate")
         player?.pause()
         player = nil
     }

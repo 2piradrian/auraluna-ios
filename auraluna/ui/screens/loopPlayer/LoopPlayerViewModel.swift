@@ -44,7 +44,6 @@ class LoopPlayerViewModel: NSObject, ObservableObject {
     }
 
     private func setupPlayer() async {
-        // Clean up old player instance before creating a new one
         player?.removeObserver(self, forKeyPath: "rate")
         player?.removeObserver(self, forKeyPath: "status")
         player?.pause()

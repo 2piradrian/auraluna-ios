@@ -24,6 +24,9 @@ struct LinealPlayerScreen: View {
                         duration: viewModel.duration,
                         seekAction: { newPosition in
                             viewModel.seek(to: newPosition)
+                        },
+                        onEditingChanged: { isEditing in
+                            viewModel.setIsSeeking(to: isEditing)
                         }
                     )
 
@@ -37,7 +40,7 @@ struct LinealPlayerScreen: View {
                     Text("Loading...")
                 }
             }
-            .padding() // This will apply horizontal and vertical padding
+            .padding()
 
         }
         .onAppear {
