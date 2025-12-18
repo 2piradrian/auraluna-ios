@@ -16,30 +16,42 @@ struct HomeScreen: View {
 
                 ScrollView {
                     VStack(spacing: 30) {
-                        AudioCoverListView(
+                        AudioCoverList(
                             list: viewModel.audios,
                             title: "Tómate tu tiempo",
                             onAudioClick: { audio in
-                                // TODO: Implement navigation
-                                print("Clicked on audio: \(audio.name)")
+                                switch audio.type {
+                                case .loop:
+                                    navController.append(.loopPlayerScreen(audioId: audio.id))
+                                case .lineal:
+                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                                }
                             }
                         )
 
-                        AudioCoverListView(
+                        AudioCoverList(
                             list: viewModel.audios,
                             title: "Momentos de paz",
                             onAudioClick: { audio in
-                                // TODO: Implement navigation
-                                print("Clicked on audio: \(audio.name)")
+                                switch audio.type {
+                                case .loop:
+                                    navController.append(.loopPlayerScreen(audioId: audio.id))
+                                case .lineal:
+                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                                }
                             }
                         )
 
-                        AudioCoverListView(
+                        AudioCoverList(
                             list: viewModel.audios,
                             title: "Crea tu ritual",
                             onAudioClick: { audio in
-                                // TODO: Implement navigation
-                                print("Clicked on audio: \(audio.name)")
+                                switch audio.type {
+                                case .loop:
+                                    navController.append(.loopPlayerScreen(audioId: audio.id))
+                                case .lineal:
+                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                                }
                             }
                         )
                     }

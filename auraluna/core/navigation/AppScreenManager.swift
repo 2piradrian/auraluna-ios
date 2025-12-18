@@ -36,17 +36,37 @@ struct AppScreenManager: View {
                         screenUtils: screenUtils,
                     )
                     case .favoritesScreen:
-                    FavoritesScreen(
-                        navController: $path,
-                        screenUtils: screenUtils
-                    )
+                        FavoritesScreen(
+                            navController: $path,
+                            viewModel: FavoritesViewModel(
+                                favoriteRepository: appContainer.favoriteRepository,
+                                audioRepository: appContainer.audioRepository
+                            ),
+                            screenUtils: screenUtils
+                        )
                     case .communityScreen:
                     CommunityScreen(
                         navController: $path,
                         screenUtils: screenUtils
                     )
-                    default:
-                        Text("Not Implemented")
+                    case let .loopPlayerScreen(audioId):
+                        LoopPlayerScreen(
+                            navController: $path,
+                            viewModel: LoopPlayerViewModel(
+                                audioRepository: appContainer.audioRepository,
+                                favoriteRepository: appContainer.favoriteRepository,
+                                audioId: audioId
+                            )
+                        )
+                    case let .linealPlayerScreen(audioId):
+                        LinealPlayerScreen(
+                            navController: $path,
+                            viewModel: LinealPlayerViewModel(
+                                audioRepository: appContainer.audioRepository,
+                                favoriteRepository: appContainer.favoriteRepository,
+                                audioId: audioId
+                            )
+                        )
                 }
             }
         }

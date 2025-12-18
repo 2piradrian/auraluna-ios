@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AudioCoverListView: View {
+struct AudioCoverList: View {
     let list: [Audio]
     let title: String
     let onAudioClick: (Audio) -> Void
@@ -16,7 +16,6 @@ struct AudioCoverListView: View {
                     ForEach(list) { audio in
                         Button(action: { onAudioClick(audio) }) {
                             VStack {
-                                // Placeholder for the cover image
                                 Image(audio.coverResource)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)

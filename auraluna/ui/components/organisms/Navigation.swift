@@ -7,8 +7,9 @@ struct AppNavigationBar: View {
         HStack {
             // Home Button
             Button(action: {
-                // Navigate to home screen
-                navController = [.homeScreen]
+                if !navController.isEmpty {
+                    navController = []
+                }
             }) {
                 VStack {
                     Image(systemName: "house.fill")
@@ -21,8 +22,9 @@ struct AppNavigationBar: View {
             
             // Favorites Button
             Button(action: {
-                // Navigate to favorites screen
-                navController = [.favoritesScreen]
+                if navController != [.favoritesScreen] {
+                    navController = [.favoritesScreen]
+                }
             }) {
                 VStack {
                     Image(systemName: "heart.fill")
@@ -35,8 +37,9 @@ struct AppNavigationBar: View {
             
             // Community Button
             Button(action: {
-                // Navigate to community screen
-                navController = [.communityScreen]
+                if navController != [.communityScreen] {
+                    navController = [.communityScreen]
+                }
             }) {
                 VStack {
                     Image(systemName: "person.3.fill")
