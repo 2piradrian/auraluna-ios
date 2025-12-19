@@ -16,48 +16,70 @@ struct HomeScreen: View {
 
                 ScrollView {
                     VStack(spacing: 30) {
-                        AudioCoverList(
-                            list: viewModel.audios,
-                            title: "Tómate tu tiempo",
-                            onAudioClick: { audio in
-                                switch audio.type {
-                                case .loop:
-                                    navController.append(.loopPlayerScreen(audioId: audio.id))
-                                case .lineal:
-                                    navController.append(.linealPlayerScreen(audioId: audio.id))
-                                }
-                            }
+                        CategoriesList(
+                            categories: AudioCategory.allCases,
+                            selectedCategories: $viewModel.selectedCategories
                         )
-
-                        AudioCoverList(
-                            list: viewModel.audios,
-                            title: "Momentos de paz",
-                            onAudioClick: { audio in
-                                switch audio.type {
-                                case .loop:
-                                    navController.append(.loopPlayerScreen(audioId: audio.id))
-                                case .lineal:
-                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                        if viewModel.selectedCategories.isEmpty {
+                            AudioCoverList(
+                                list: viewModel.audios,
+                                title: "Tómate tu tiempo",
+                                onAudioClick: { audio in
+                                    switch audio.type {
+                                    case .loop:
+                                        navController.append(.loopPlayerScreen(audioId: audio.id))
+                                    case .lineal:
+                                        navController.append(.linealPlayerScreen(audioId: audio.id))
+                                    }
                                 }
-                            }
-                        )
-
-                        AudioCoverList(
-                            list: viewModel.audios,
-                            title: "Crea tu ritual",
-                            onAudioClick: { audio in
-                                switch audio.type {
-                                case .loop:
-                                    navController.append(.loopPlayerScreen(audioId: audio.id))
-                                case .lineal:
-                                    navController.append(.linealPlayerScreen(audioId: audio.id))
+                            )
+                            
+                            AudioCoverList(
+                                list: viewModel.audios,
+                                title: "Momentos de paz",
+                                onAudioClick: { audio in
+                                    switch audio.type {
+                                    case .loop:
+                                        navController.append(.loopPlayerScreen(audioId: audio.id))
+                                    case .lineal:
+                                        navController.append(.linealPlayerScreen(audioId: audio.id))
+                                    }
                                 }
-                            }
-                        )
+                            )
+                            
+                            AudioCoverList(
+                                list: viewModel.audios,
+                                title: "Crea tu ritual",
+                                onAudioClick: { audio in
+                                    switch audio.type {
+                                    case .loop:
+                                        navController.append(.loopPlayerScreen(audioId: audio.id))
+                                    case .lineal:
+                                        navController.append(.linealPlayerScreen(audioId: audio.id))
+                                    }
+                                }
+                            )
+                        } else {
+                            AudioCoverList(
+                                list: viewModel.audios,
+                                title: "Tómate tu tiempo",
+                                onAudioClick: { audio in
+                                    switch audio.type {
+                                    case .loop:
+                                        navController.append(.loopPlayerScreen(audioId: audio.id))
+                                    case .lineal:
+                                        navController.append(.linealPlayerScreen(audioId: audio.id))
+                                    }
+                                }
+                            )
+                        }
                     }
                 }
             }
             .onAppear {
+                viewModel.getAudios()
+            }
+            .onChange(of: viewModel.selectedCategories) {
                 viewModel.getAudios()
             }
 

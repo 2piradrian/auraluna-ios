@@ -8,7 +8,7 @@ class HomeViewModel: ObservableObject {
     private let audiosRepository: AudioRepository
     
     @Published var audios: [Audio] = []
-    @Published var selectedCategories: [AudioCategory] = []
+    @Published var selectedCategories: Set<AudioCategory> = []
     
     init(favoritesRepository: FavoriteRepository, audiosRepository: AudioRepository) {
         self.favoritesRepository = favoritesRepository
@@ -22,7 +22,7 @@ class HomeViewModel: ObservableObject {
                 self.audios = audiosResult
             }
             else {
-                let audiosResult = try await audiosRepository.getByCategories(categories: selectedCategories)
+                let audiosResult = try await audiosRepository.getByCategories(categories: Array(selectedCategories))
                 self.audios = audiosResult
             }
         }
@@ -30,10 +30,10 @@ class HomeViewModel: ObservableObject {
     
     func toggleSelectedCategory(_ category: AudioCategory) {
         if selectedCategories.contains(category) {
-            selectedCategories.removeAll { $0 == category }
+            selectedCategories.remove(category)
         }
         else {
-            selectedCategories.append(category)
+            selectedCategories.insert(category)
         }
     }
 }
